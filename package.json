@@ -8,5 +8,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuizCavalini/PAME-25.1-Entrega-2---LuizCavalini.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LuizCavalini/PAME-25.1-Entrega-2---LuizCavalini/issues"
+  },
+  "homepage": "https://github.com/LuizCavalini/PAME-25.1-Entrega-2---LuizCavalini#readme",
+  "description": "",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }

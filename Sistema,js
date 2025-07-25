@@ -1,0 +1,17 @@
+const Cliente = require('./Cliente.js');
+const Funcionario = require('./Funcionario');
+const Quartos = require('./Quartos.js');
+const Reserva = require('./Reserva.js');
+
+class Sistema{
+    constructor(){
+        this.clientes = [];
+        this.funcionarios = [];
+        this.quartos = [];
+        this.reservas = [];
+        this.usuarioLogado = null;
+    }
+    // Métodos
+}
+module.exports = Sistema;
+
