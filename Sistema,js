@@ -108,6 +108,13 @@ class Sistema{
         }
     }
 
+    verMinhasReservas(){
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Cliente)){
+            console.log("Acesso negado.");
+            return [];
+        }
+        return this.reservas.filter(r => r.idCliente === this.usuarioLogado.id);
+    }
     
     
 }
