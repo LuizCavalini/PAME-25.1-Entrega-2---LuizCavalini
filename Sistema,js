@@ -52,6 +52,18 @@ class Sistema{
         console.log("Logout realizado com sucesso.");
     }
 
+    addQuarto(qtdCamas, precoPorNoite, qtdDisponivel, nome, descricao){
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Funcionario)){
+            console.log("Acesso negado. Apenas funcionários podem adicionar quartos.");
+            return;
+        }
+
+        const novoQuarto = new Quartos(qtdCamas, precoPorNoite, qtdDisponivel, nome, descricao);
+        this.quartos.push(novoQuarto);
+        console.log(`Quarto "${nome}" adicionado com sucesso!`);
+    }
+
+    
 }
 module.exports = Sistema;
 
