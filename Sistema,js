@@ -63,7 +63,17 @@ class Sistema{
         console.log(`Quarto "${nome}" adicionado com sucesso!`);
     }
 
-    
+    verListaDeReservas(){
+        return this.reservas;
+    }
+
+    verListaDeQuartos(){
+        return this.quartos;
+    }
+
+    verListaDeClientes(){
+        return this.clientes;
+    }
 }
 module.exports = Sistema;
 
