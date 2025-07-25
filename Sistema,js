@@ -33,7 +33,23 @@ class Sistema{
     }
 
     login(email, senha){
-        let usuario = this.funcionarios.find
+        let usuario = this.funcionarios.find(f => f.email === email && c.senha === senha);
+        if(usuario){
+            this.usuarioLogado = usuario;
+            return{tipo: 'funcionario', dados: usuario};
+        }
+        usuario = this.clientes.find(c => c.email === email && c.senha === senha);
+        if(usuario){
+            this.usuarioLogado = usuario;
+            return{tipo: 'cliente', dados: usuario};
+        }
+        this.usuarioLogado = null;
+        return null;
+    }
+
+    logout(){
+        this.usuarioLogado = null;
+        console.log("Logout realizado com sucesso.");
     }
 
 }
