@@ -98,6 +98,17 @@ class Sistema{
         }
     }
     
+    statusReserva(idReserva, novoStatus){
+        const reserva = this.reservas.find(r => r.id === idReserva);
+        if(reserva){
+            reserva.status = novoStatus;
+            console.log(`Status da reserva ${idReserva} alterado para "${novoStatus}".`);
+        }else{
+            console.log("Erro: Reserva não encontrada.");
+        }
+    }
+
+    
     
 }
 module.exports = Sistema;
