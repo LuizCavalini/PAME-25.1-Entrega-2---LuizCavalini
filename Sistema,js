@@ -10,8 +10,32 @@ class Sistema{
         this.quartos = [];
         this.reservas = [];
         this.usuarioLogado = null;
+        this.proximoIdCliente = 1;
+        this.proximoIdFuncionario = 1;
+        this.proximoIdReserva = 1;
     }
-    // Métodos
+    // Processos
+
+    cadastroCliente(nome, dataNascimento, cpf, email, senha){
+        const clienteExistente = this.clientes.find(c => c.cpf === cpf || c.email === email);
+        if(clienteExistente){
+            console.log("Erro: CPF ou E-mail já cadastrado.");
+            return null; 
+        }
+        const novoCliente = new Cliente(this.proximoIdCliente, nome, dataNascimento, cpf, email, senha);
+
+        this.clientes.push(novoCliente);
+
+        this.proximoIdCliente++;
+
+        console.log("Cadastro realizado com sucesso");
+        return novoCliente;
+    }
+
+    login(email, senha){
+        let usuario = this.funcionarios.find
+    }
+
 }
 module.exports = Sistema;
 
