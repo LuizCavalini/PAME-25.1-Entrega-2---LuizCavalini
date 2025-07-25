@@ -74,6 +74,31 @@ class Sistema{
     verListaDeClientes(){
         return this.clientes;
     }
+
+    fazerReserva(nomeQuarto, dataEntrada, dataSaida){
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Cliente)){
+            console.log("Acesso negado. Apenas clientes podem fazer reservas.");
+            return null;
+        }
+
+        const quarto = this.quartos.find(q => q.nome === nomeQuarto && q.qtdDisponivel > 0);
+
+        if(quarto){
+            const novaReserva = new Reserva(this.proximoIdReserva, this.usuarioLogado.id, 'pendente', dataEntrada, dataSaida);
+            this.reservas.push(novaReserva);
+            this.proximoIdReserva++;
+
+            quarto.qtdDisponivel--;
+            
+            console.log("Reserva realizada com sucesso!");
+            return novaReserva;
+        }else{
+            console.log("Quarto não Disponível ou não encontrado.");
+            return null;
+        }
+    }
+    
+    
 }
 module.exports = Sistema;
 
