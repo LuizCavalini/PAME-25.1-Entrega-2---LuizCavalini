@@ -2,6 +2,7 @@ const Cliente = require('./Cliente.js');
 const Funcionario = require('./Funcionario.js');
 const Quartos = require('./Quartos.js');
 const Reserva = require('./Reserva.js');
+const Avaliacao = require('./Avaliacao.js');
 
 class Sistema{
     constructor(){
@@ -9,10 +10,12 @@ class Sistema{
         this.funcionarios = [];
         this.quartos = [];
         this.reservas = [];
+        this.avaliacoes = [];
         this.usuarioLogado = null;
         this.proximoIdCliente = 1;
         this.proximoIdFuncionario = 1;
         this.proximoIdReserva = 1;
+        this.proximoIdAvaliacao = 1;
     }
     // Processos
 
@@ -161,6 +164,39 @@ class Sistema{
         
         console.log(`Reserva ID ${idReserva} foi cancelada com sucesso.`);
         return true;
+    }
+
+
+    avaliarEstadia(idReserva, nota, comentario) {
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Cliente)){
+            console.log("Acesso negado. Apenas clientes podem avaliar estadias.");
+            return;
+        }
+
+        const reserva = this.reservas.find(r => r.id === idReserva && r.idCliente === this.usuarioLogado.id);
+
+        if(!reserva){
+            console.log("Erro: Reserva não encontrada ou não pertence a você.");
+            return;
+        }
+
+        if(reserva.status !== 'realizada'){
+            console.log("Erro: Você só pode avaliar estadias com status 'realizada'.");
+            return;
+        }
+        
+        // Verifica se esta reserva já foi avaliada
+        const avaliacaoExistente = this.avaliacoes.find(a => a.idReserva === idReserva);
+        if(avaliacaoExistente){
+            console.log("Erro: Esta estadia já foi avaliada.");
+            return;
+        }
+
+        const novaAvaliacao = new Avaliacao(this.proximoIdAvaliacao, this.usuarioLogado.id, reserva.nomeQuarto, nota, comentario);
+        this.avaliacoes.push(novaAvaliacao);
+        this.proximoIdAvaliacao++;
+
+        console.log("Obrigado pela sua avaliação!");
     }
 }
 module.exports = Sistema;
