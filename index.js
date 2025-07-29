@@ -99,7 +99,7 @@ function menuFuncionario(){
     console.log("7. Logout");
 
     const opcao = prompt(">> Escolha uma opção: ");
-    switch (opcao) {
+    switch(opcao){
         case '1':
             console.log(meuHotel.verMeusDados());
             break;

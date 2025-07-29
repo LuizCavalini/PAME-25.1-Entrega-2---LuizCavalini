@@ -1,7 +1,7 @@
-class Funcionario {
-    constructor(id, nome, cpf, email, senha){
+class Funcionario{
+    constructor(id, nomeUsuario, cpf, email, senha){
         this.id = id;
-        this.nome = nome;
+        this.nomeUsuario = nomeUsuario;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
