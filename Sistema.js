@@ -33,7 +33,7 @@ class Sistema{
     }
 
     login(email, senha){
-        let usuario = this.funcionarios.find(f => f.email === email && c.senha === senha);
+        let usuario = this.funcionarios.find(f => f.email === email && f.senha === senha);
         if(usuario){
             this.usuarioLogado = usuario;
             return{tipo: 'funcionario', dados: usuario};
@@ -154,7 +154,7 @@ class Sistema{
 
         if(quarto){
             quarto.qtdDisponivel++;
-            console.log('Um quarto do tipo ${quarto.nome}" foi devolvido ao estoque.');
+            console.log('Um quarto do tipo "${quarto.nome}" foi devolvido ao estoque.');
         }
 
         reservaParaCancelar.status = 'cancelada';
