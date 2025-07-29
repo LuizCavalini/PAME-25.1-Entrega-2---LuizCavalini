@@ -1,5 +1,5 @@
 const Cliente = require('./Cliente.js');
-const Funcionario = require('./Funcionario');
+const Funcionario = require('./Funcionario.js');
 const Quartos = require('./Quartos.js');
 const Reserva = require('./Reserva.js');
 
