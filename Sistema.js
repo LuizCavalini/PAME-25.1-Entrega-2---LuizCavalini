@@ -140,12 +140,10 @@ class Sistema{
             console.log("Erro: Reserva com o ID fornecido não foi encontrada.");
             return false;
         }
-
         if(reservaParaCancelar.idCliente !== this.usuarioLogado.id){
             console.log("Erro: Você não tem permissão para cancelar esta reserva.");
             return false;
         }
-
         if(reservaParaCancelar.status === 'cancelada'){
             console.log("Atenção: Esta reserva já está cancelada.");
             return false;
@@ -179,12 +177,10 @@ class Sistema{
             console.log("Erro: Reserva não encontrada ou não pertence a você.");
             return;
         }
-
         if(reserva.status !== 'realizada'){
             console.log("Erro: Você só pode avaliar estadias com status 'realizada'.");
             return;
         }
-        
         // Verifica se esta reserva já foi avaliada
         const avaliacaoExistente = this.avaliacoes.find(a => a.idReserva === idReserva);
         if(avaliacaoExistente){
@@ -201,12 +197,12 @@ class Sistema{
 
     visualizarAvaliacoes(nomeQuarto){
         const avaliacoesDoQuarto = this.avaliacoes.filter(a => a.nomeQuarto === nomeQuarto);
-        
+
         if(avaliacoesDoQuarto.length === 0){
             console.log(`Ainda não há avaliações para o quarto "${nomeQuarto}".`);
             return [];
         }
-        
+    
         return avaliacoesDoQuarto;
     }
 
@@ -224,8 +220,54 @@ class Sistema{
         if(novosDados.senha){
             this.usuarioLogado.senha = novosDados.senha;
         }
-
         console.log("Seus dados foram atualizados com sucesso.");
+        return true;
+    }
+
+    editarQuarto(nomeQuarto, novosDados){
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Funcionario)){
+            console.log("Acesso negado. Apenas funcionários podem editar quartos.");
+            return false;
+        }
+        const quarto = this.quartos.find(q => q.nome === nomeQuarto);
+        if(!quarto){
+            console.log("Erro: Quarto não encontrado.");
+            return false;
+        }
+        // Atualiza os dados fornecidos
+        if(novosDados.precoPorNoite){
+            quarto.precoPorNoite = novosDados.precoPorNoite;
+        }
+        if(novosDados.descricao){
+            quarto.descricao = novosDados.descricao;
+        }
+        if(novosDados.qtdDisponivel){
+            quarto.qtdDisponivel = novosDados.qtdDisponivel;
+        }
+
+        console.log(`Os dados do quarto "${nomeQuarto}" foram atualizados.`);
+        return true;
+    }
+
+    excluirQuarto(nomeQuarto){
+        if(!this.usuarioLogado || !(this.usuarioLogado instanceof Funcionario)){
+            console.log("Acesso negado. Apenas funcionários podem excluir quartos.");
+            return false;
+        }
+        // Checar reservas ativas para este quarto
+        const reservaAtiva = this.reservas.find(r => r.nomeQuarto === nomeQuarto && (r.status === 'pendente' || r.status === 'realizada'));
+        if(reservaAtiva){
+            console.log(`Erro: Não é possível excluir o quarto "${nomeQuarto}", pois ele possui reservas ativas.`);
+            return false;
+        }
+        const indiceQuarto = this.quartos.findIndex(q => q.nome === nomeQuarto);
+        if(indiceQuarto === -1){
+            console.log("Erro: Quarto não encontrado.");
+            return false;
+        }
+        // Remove o quarto do array
+        this.quartos.splice(indiceQuarto, 1);
+        console.log(`Quarto "${nomeQuarto}" excluído com sucesso.`);
         return true;
     }
 }
