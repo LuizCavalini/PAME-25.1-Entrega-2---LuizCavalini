@@ -167,7 +167,7 @@ class Sistema{
     }
 
 
-    avaliarEstadia(idReserva, nota, comentario) {
+    avaliarEstadia(idReserva, nota, comentario){
         if(!this.usuarioLogado || !(this.usuarioLogado instanceof Cliente)){
             console.log("Acesso negado. Apenas clientes podem avaliar estadias.");
             return;
@@ -197,6 +197,36 @@ class Sistema{
         this.proximoIdAvaliacao++;
 
         console.log("Obrigado pela sua avaliação!");
+    }
+
+    visualizarAvaliacoes(nomeQuarto){
+        const avaliacoesDoQuarto = this.avaliacoes.filter(a => a.nomeQuarto === nomeQuarto);
+        
+        if(avaliacoesDoQuarto.length === 0){
+            console.log(`Ainda não há avaliações para o quarto "${nomeQuarto}".`);
+            return [];
+        }
+        
+        return avaliacoesDoQuarto;
+    }
+
+    modificarMeusDados(novosDados){
+        if(!this.usuarioLogado){
+            console.log("Erro: Nenhum usuário logado.");
+            return false;
+        }
+        if(novosDados.nome){
+            this.usuarioLogado.nome = novosDados.nome;
+        }
+        if(novosDados.email){
+            this.usuarioLogado.email = novosDados.email;
+        }
+        if(novosDados.senha){
+            this.usuarioLogado.senha = novosDados.senha;
+        }
+
+        console.log("Seus dados foram atualizados com sucesso.");
+        return true;
     }
 }
 module.exports = Sistema;
