@@ -39,13 +39,15 @@ class Sistema{
         let usuario = this.funcionarios.find(f => f.email === email && f.senha === senha);
         if(usuario){
             this.usuarioLogado = usuario;
-            return{tipo: 'funcionario', dados: usuario};
+            return { tipo: 'funcionario', dados: usuario };
         }
+
         usuario = this.clientes.find(c => c.email === email && c.senha === senha);
         if(usuario){
             this.usuarioLogado = usuario;
-            return{tipo: 'cliente', dados: usuario};
+            return { tipo: 'cliente', dados: usuario };
         }
+
         this.usuarioLogado = null;
         return null;
     }
