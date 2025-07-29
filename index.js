@@ -17,7 +17,7 @@ function menuPrincipal(){
     console.log("3. Sair do Programa");
 
     const opcao = prompt(">> Escolha uma opção: ");
-    switch (opcao){
+    switch(opcao){
         case '1':
             console.log("\n--- Login ---");
             const email = prompt("Email: ");
@@ -46,7 +46,7 @@ function menuPrincipal(){
 }
 
 // MENU 2: Para quando um CLIENTE está logado
-function menuCliente() {
+function menuCliente(){
     console.log(`\n--- MENU DO CLIENTE: ${meuHotel.usuarioLogado.nome} ---`);
     console.log("1. Ver meus Dados");
     console.log("2. Ver Lista de Quartos");
@@ -56,7 +56,7 @@ function menuCliente() {
     console.log("6. Logout");
 
     const opcao = prompt(">> Escolha uma opção: ");
-    switch (opcao) {
+    switch(opcao){
         case '1':
             console.log(meuHotel.verMeusDados());
             break;
@@ -88,7 +88,7 @@ function menuCliente() {
 }
 
 // MENU 3: Para quando um FUNCIONÁRIO está logado
-function menuFuncionario() {
+function menuFuncionario(){
     console.log(`\n--- PAINEL DO FUNCIONÁRIO: ${meuHotel.usuarioLogado.nomeUsuario} ---`);
     console.log("1. Ver Meus Dados");
     console.log("2. Ver Lista de Todas as Reservas");
@@ -138,3 +138,18 @@ function menuFuncionario() {
     }
 }
 
+function main(){
+    while(true){
+        if(!meuHotel.usuarioLogado){
+            menuPrincipal();
+        }else{
+            if(meuHotel.usuarioLogado.nomeUsuario){ 
+                menuFuncionario();
+            }else{
+                menuCliente();
+            }
+        }
+    }
+}
+
+main();
